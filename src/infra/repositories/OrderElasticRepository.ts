@@ -1,0 +1,31 @@
+import { Injectable } from '@nestjs/common';
+
+import BaseElasticRepository from "./base/BaseElasticRepository";
+
+@Injectable()
+export class OrderElasticRepository extends BaseElasticRepository implements OrderRepositoryInterface {
+    public async getOrderList(page: number = 1, perPage: number = 20, query: object, sort?: object): Promise<object> {
+        const searchResult: any = await this.searchDocument(page, perPage, 'order', query, sort);
+        const data: any[] = [];
+        let total = 0;
+
+        if (searchResult.hits.hits.length > 0) {
+            total = searchResult.hits.total;
+        }
+
+        searchResult.hits.hits.forEach((element: any) => {
+            const resultData = element._source;
+            data.push(resultData);
+        });
+
+        return {
+            data,
+            meta: {
+                page: Number(page),
+                per_page: Number(perPage),
+                total_data: Number(total),
+                total_page: Math.ceil(total / perPage)
+            }
+        };
+    }
+}
