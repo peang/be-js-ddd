@@ -1,4 +1,6 @@
-class Order {
+import { DomainModelInterface } from "./DomainModelInterface";
+
+export class Order implements DomainModelInterface {
     private id: string;
     private buyerId: string;
     private orderNumber: string;
@@ -47,5 +49,85 @@ class Order {
             '',
             ''
         );
+    }
+
+    public getId(): string {
+        return this.id;
+    }
+
+    public setId(id: string): void {
+        this.id = id;
+    }
+
+    public getBuyerId(): string {
+        return this.buyerId;
+    }
+
+    public setBuyerId(buyerId: string): void {
+        this.buyerId = buyerId;
+    }
+
+    public getOrderNumber(): string {
+        return this.orderNumber;
+    }
+
+    public setOrderNumber(orderNumber: string): void {
+        this.orderNumber = orderNumber;
+    }
+
+    public getOrderType(): number {
+        return this.orderType;
+    }
+
+    public setOrderType(orderType: number): void {
+        this.orderType = orderType;
+    }
+
+    public getStatus(): string {
+        return this.status;
+    }
+
+    public setStatus(status: string): void {
+        this.status = status;
+    }
+
+    public getTotal(): number {
+        return this.total;
+    }
+
+    public setTotal(total: number): void {
+        this.total = total;
+    }
+
+    public getWholesalerId(): string {
+        return this.wholesalerId;
+    }
+
+    public setWholesalerId(wholesalerId: string): void {
+        this.wholesalerId = wholesalerId;
+    }
+
+    public getWholesalerName(): string {
+        return this.wholesalerName;
+    }
+
+    public setWholesalerName(wholesalerName: string): void {
+        this.wholesalerName = wholesalerName;
+    }
+
+    public getCratedAt(): string {
+        return this.cratedAt;
+    }
+
+    public setCratedAt(cratedAt: string): void {
+        this.cratedAt = cratedAt;
+    }
+
+    public getUpdatedAt(): string {
+        return this.updatedAt;
+    }
+
+    public setUpdatedAt(updatedAt: string): void {
+        this.updatedAt = updatedAt;
     }
 }

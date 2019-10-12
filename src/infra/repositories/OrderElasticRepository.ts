@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import BaseElasticRepository from "./base/BaseElasticRepository";
+import { Order } from '../../domain/model/OrderModel';
 
 @Injectable()
 export class OrderElasticRepository extends BaseElasticRepository implements OrderRepositoryInterface {
@@ -15,7 +16,18 @@ export class OrderElasticRepository extends BaseElasticRepository implements Ord
 
         searchResult.hits.hits.forEach((element: any) => {
             const resultData = element._source;
-            data.push(resultData);
+            data.push(new Order(
+                resultData.order_id,
+                resultData.buyer_id,
+                resultData.order_number,
+                resultData.order_type,
+                resultData.status,
+                resultData.total,
+                resultData.wholesaler_id,
+                resultData.wholesaler_name,
+                resultData.created_at,
+                resultData.updated_at
+            ));
         });
 
         return {

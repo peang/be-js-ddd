@@ -15,7 +15,6 @@ async function bootstrap() {
 
 async function initDatabases() {
     if (process.env.ELASTIC_DB_HOST && process.env.ELASTIC_DB_USERNAME && process.env.ELASTIC_DB_PASSWORD) {
-        console.log('Init Elastic');
         Elastic.initialize({
             protocol: String('https'),
             host: String(process.env.ELASTIC_DB_HOST),

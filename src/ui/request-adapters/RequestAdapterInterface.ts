@@ -2,7 +2,7 @@ import { DTOInterface } from "src/app/dto/DTOInterface";
 import { BadRequestException } from "@nestjs/common";
 
 export interface RequestAdapterInterface {
-    getDTO(data: object): DTOInterface;
+    getDTO(data: object, context: object): DTOInterface;
 
-    validate(data: object): boolean | BadRequestException;
+    getScheme(): object;
 }

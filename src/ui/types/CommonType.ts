@@ -1,4 +1,10 @@
 export interface ResponseInterface {
-    status?: number,
-    
+    message: string,
+    data: any
+}
+
+export interface RequestInterface {
+    query?: any,
+    body?: any,
+    params?: any
 }

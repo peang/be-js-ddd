@@ -1,5 +1,5 @@
 import { HttpError, Elastic } from 'larisin-common';
-// import { generatePagination } from '../../utils/filter_helpers';
+import { CommonInfraService } from '../../services/CommonInfraService';
 
 export default class BaseElasticRepository {
     public _elastic: any;
@@ -74,12 +74,12 @@ export default class BaseElasticRepository {
     }
 
     public async searchDocument(page: number = 0, perPage: number = 20, index: string, query: object, sort?: object) {
-        // const { size, from } = generatePagination(page, perPage);
+        const { size, from } = CommonInfraService.generatePagination(page, perPage);
         return await this._elastic.search({
             index,
             body: {
-                size: 10,
-                from: 0,
+                size,
+                from,
                 query,
                 sort
             }
