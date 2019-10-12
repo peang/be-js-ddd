@@ -17,7 +17,7 @@ export class OrderApp {
     }
 
     public async orderDetail(dto: OrderDetailDTO): Promise<Order> {
-        const order = await Order.create();
+        const order = await Order.create('E33DLDW86', '20190925231547015', 0, 'done', 20000, 'NoID', 'NoName');
         if (!order) {
             throw new OrderNotFoundException(dto.order_id);
         }

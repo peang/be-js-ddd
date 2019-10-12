@@ -1,6 +1,5 @@
 import { Order } from '../../domain/model/OrderModel';
 import BaseTransformer from './BaseTransformer';
-import { async } from 'rxjs/internal/scheduler/async';
 
 export default class OrderTransformer extends BaseTransformer {
     public static async transformDetail(order: Order) {

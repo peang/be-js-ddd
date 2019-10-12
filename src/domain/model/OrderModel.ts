@@ -1,4 +1,5 @@
 import { DomainModelInterface } from "./DomainModelInterface";
+import * as uuid from 'uuid';
 
 export class Order implements DomainModelInterface {
     private id: string;
@@ -36,18 +37,18 @@ export class Order implements DomainModelInterface {
         this.updatedAt = updatedAt;
     }
 
-    public static async create() {
+    public static async create(buyerId: string, orderNumber: string, orderType: number, status: string, total: number, wholesalerId: string, wholesalerName: string) {
         return new Order(
-            '1',
-            '',
-            '',
-            0,
-            '',
-            0,
-            '',
-            '',
-            '',
-            ''
+            uuid.v4(),
+            buyerId,
+            orderNumber,
+            orderType,
+            status,
+            total,
+            wholesalerId,
+            wholesalerName,
+            (new Date()).toString(),
+            (new Date()).toString()
         );
     }
 

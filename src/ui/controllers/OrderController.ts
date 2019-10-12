@@ -32,7 +32,7 @@ export class OrderController {
         const order: Order = await this.orderApp.orderDetail(dto);
         return {
             message: 'ORDER_DETAIL',
-            data: OrderTransformer.transformDetail(order)
+            data: await OrderTransformer.transformDetail(order)
         };
     }
 }

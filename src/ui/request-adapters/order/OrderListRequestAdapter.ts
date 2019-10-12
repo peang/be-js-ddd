@@ -10,6 +10,7 @@ export class OrderListRequestAdapter extends RequestAdapter implements RequestAd
     public async getDTO(data: RequestInterface, context: object): Promise<OrderListDTO> {
         await this.validate(data, this.getScheme());
         
+        // sample payload
         return new OrderListDTO('E33DLDW86', data.query.page, data.query.per_page, '', '', '', '');
     }
 
