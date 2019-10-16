@@ -1,19 +1,20 @@
-import { HttpError, Elastic } from 'larisin-common';
 import { CommonInfraService } from '../../services/CommonInfraService';
+import { ElasticService } from '../../services/ElasticService';
 
-export default class BaseElasticRepository {
-    public _elastic: any;
-    constructor() {
-        this._elastic = Elastic.getInstance();
+import { InternalServerErrorException } from '@nestjs/common';
+
+export class BaseElasticRepository {
+    constructor(private readonly esclient) {
+        this.esclient = ElasticService.getInstance();
     }
 
     public async countIndex(index: string) {
-        return await this._elastic.count({
+        return await this.esclient.count({
             index,
             type: 'CatalogItem'
         }, (err: any, res: any) => {
             if (err) {
-                throw HttpError.InternalServerError('ERROR_COUNTING_INDEX');
+                throw new InternalServerErrorException('ERROR_COUNTING_INDEX');
             } else {
                 return true;
             }
@@ -21,11 +22,11 @@ export default class BaseElasticRepository {
     }
 
     public async createIndex(index: string) {
-        return await this._elastic.indices.create({
+        return await this.esclient.indices.create({
             index
         }, (err: any, res: any) => {
             if (err) {
-                throw HttpError.InternalServerError('ERROR_CREATING_INDEX');
+                throw new InternalServerErrorException('ERROR_CREATING_INDEX');
             } else {
                 return true;
             }
@@ -33,11 +34,11 @@ export default class BaseElasticRepository {
     }
 
     public async deleteIndex(index: string) {
-        return await this._elastic.indices.delete({
+        return await this.esclient.indices.delete({
             index
         }, (err: any, res: any) => {
             if (err) {
-                throw HttpError.InternalServerError('ERROR_DELETING_INDEX');
+                throw new InternalServerErrorException('ERROR_DELETING_INDEX');
             } else {
                 return true;
             }
@@ -45,14 +46,14 @@ export default class BaseElasticRepository {
     }
 
     public async insertDocument(index: string, type: string, body: object, id?: string) {
-        return await this._elastic.index({
+        return await this.esclient.index({
             index,
             type,
             body,
             id
         }, (err: any, res: any) => {
             if (err) {
-                throw HttpError.InternalServerError('ERROR_ADDING_DATA');
+                throw new InternalServerErrorException('ERROR_ADDING_DATA');
             } else {
                 return true;
             }
@@ -60,13 +61,13 @@ export default class BaseElasticRepository {
     }
 
     public async deleteDocument(index: string, type: string, id: string) {
-        return await this._elastic.delete({
+        return await this.esclient.delete({
             index,
             type,
             id
         }, (err: any, res: any) => {
             if (err) {
-                throw HttpError.InternalServerError('ERROR_DELETING_DATA');
+                throw new InternalServerErrorException('ERROR_DELETING_DATA');
             } else {
                 return true;
             }
@@ -74,8 +75,11 @@ export default class BaseElasticRepository {
     }
 
     public async searchDocument(page: number = 0, perPage: number = 20, index: string, query: object, sort?: object) {
+        console.log(this.esclient);
+
         const { size, from } = CommonInfraService.generatePagination(page, perPage);
-        return await this._elastic.search({
+
+        return await this.esclient.search({
             index,
             body: {
                 size,
@@ -83,11 +87,14 @@ export default class BaseElasticRepository {
                 query,
                 sort
             }
-        }).then((res: any) => res);
+        }).then((res: any) => res).catch((err: any) => {
+            console.log(err);
+            process.exit(0);
+        });
     }
 
     public async findOne(index: string, query: object) {
-        return await this._elastic.search({
+        return await this.esclient.search({
             index,
             body: {
                 size: 1,
@@ -97,7 +104,7 @@ export default class BaseElasticRepository {
     }
 
     public async findAll(index: string, query: object) {
-        return await this._elastic.search({
+        return await this.esclient.search({
             index,
             body: {
                 query

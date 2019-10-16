@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 export class CommonInfraService {
     public static generatePagination(page: number = 1, perPage: number = 10) {
         let from, size = 0;

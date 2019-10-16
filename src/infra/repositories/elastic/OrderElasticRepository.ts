@@ -1,7 +1,8 @@
+import { BaseElasticRepository } from "../base/BaseElasticRepository";
+import { Order } from '../../../domain/model/OrderModel';
+
 import { Injectable } from '@nestjs/common';
 
-import BaseElasticRepository from "./base/BaseElasticRepository";
-import { Order } from '../../domain/model/OrderModel';
 
 @Injectable()
 export class OrderElasticRepository extends BaseElasticRepository implements OrderRepositoryInterface {

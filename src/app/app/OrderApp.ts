@@ -1,18 +1,21 @@
 import { Injectable } from "@nestjs/common";
-import { OrderElasticRepository } from "../../infra/repositories/OrderElasticRepository";
 import { OrderNotFoundException } from "../exceptions/OrderNotFoundException";
 import { OrderListDTO } from "../dto/order/OrderListDTO";
 import { OrderDetailDTO } from "../dto/order/OrderDetailDTO";
 import { Order } from '../../domain/model/OrderModel';
-import { OrderInfraService } from "../../infra/services/OrderInfraService";
+import { OrderElasticRepository } from "../../infra/repositories/elastic/OrderElasticRepository";
+import { OrderInfraHelper } from "../../infra/helpers/OrderInfraService";
 
 @Injectable()
 export class OrderApp {
-    constructor(private readonly orderElasticRepo: OrderElasticRepository, private readonly orderInfraService: OrderInfraService) { }
+    constructor(
+        private readonly OrderElasticRepo: OrderElasticRepository,
+        private readonly OrderInfraService: OrderInfraHelper
+    ) { }
 
     public async orderList(dto: OrderListDTO): Promise<any> {
-        const query = this.orderInfraService.generateOrderFilters({order_id: dto.order_id}, dto.buyer_id);
-        const orders = await this.orderElasticRepo.getOrderList(dto.page, dto.per_page, query.query);
+        const query = this.OrderInfraService.generateOrderFilters({ order_id: dto.order_id }, dto.buyer_id);
+        const orders = await this.OrderElasticRepo.getOrderList(dto.page, dto.per_page, query.query);
         return orders;
     }
 

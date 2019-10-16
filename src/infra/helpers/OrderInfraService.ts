@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class OrderInfraService {
+export class OrderInfraHelper {
     public generateOrderFilters(filter: any, buyerId: string) {
         const queryArr = [];
         const filters: any = {
