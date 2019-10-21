@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 import { OrderNotFoundException } from "../exceptions/OrderNotFoundException";
 import { OrderListDTO } from "../dto/order/OrderListDTO";
 import { OrderDetailDTO } from "../dto/order/OrderDetailDTO";
-import { Order } from '../../domain/model/OrderModel';
+import { Order } from '../../domain/models/OrderModel';
 import { OrderElasticRepository } from "../../infra/repositories/elastic/OrderElasticRepository";
 import { OrderInfraHelper } from "../../infra/helpers/OrderInfraService";
 
@@ -28,7 +28,6 @@ export class OrderApp {
             throw new OrderNotFoundException(dto.order_id);
         }
 
-        console.log(order);
         return order;
     }
 }

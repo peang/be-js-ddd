@@ -1,5 +1,5 @@
 import { BaseElasticRepository } from "../base/BaseElasticRepository";
-import { Order } from '../../../domain/model/OrderModel';
+import { Order } from '../../../domain/models/OrderModel';
 
 import { Injectable } from '@nestjs/common';
 

@@ -1,21 +1,22 @@
-import { ElasticService } from '../infra/services/ElasticService';
-
+import { RetailerUserModule } from './modules/RetailerUserModule';
 import { OrderModule } from './modules/OrderModule';
+import { AuthModule } from './modules/AuthModule';
 
 import { AuthMiddleware } from './middlewares/AuthMiddlware';
 
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import { AuthController } from './controllers/AuthController';
 
 @Module({
     imports: [
-        OrderModule
+        RetailerUserModule,
+        OrderModule,
+        AuthModule
     ],
     controllers: [],
-    providers: [ElasticService]
+    providers: []
 })
 
-export class MainModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(AuthMiddleware).forRoutes('*')
-    }
+export class MainModule {
+    
 }

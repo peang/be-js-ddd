@@ -4,7 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { RequestAdapter } from "../Adapters";
 import * as Joi from '@hapi/joi';
 import { RequestInterface } from "../../../ui/types/CommonType";
-import { IContext } from "src/ui/types/JWTType";
+import { IContext } from "../../types/CommonType";
 
 @Injectable()
 export class OrderListRequestAdapter extends RequestAdapter implements RequestAdapterInterface {

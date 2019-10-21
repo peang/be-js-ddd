@@ -8,3 +8,8 @@ export interface RequestInterface {
     body?: any,
     params?: any
 }
+
+export interface IContext {
+    user_id: string,
+    entity_id: string
+}

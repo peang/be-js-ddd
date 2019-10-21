@@ -8,7 +8,6 @@ export class OrderListDTO implements DTOInterface {
     public order_number: string;
     public status: string;
     public sort: string;
-    public query: object;
 
     constructor(
         buyer_id: string,

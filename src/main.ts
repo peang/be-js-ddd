@@ -4,6 +4,8 @@ import * as env from 'dotenv';
 
 import { ElasticService } from './infra/services/ElasticService';
 import { DBService } from './infra/services/DBService';
+import { FirebaseService } from './infra/services/FirebaseService';
+import { AuthMiddleware } from './ui/middlewares/AuthMiddlware';
 
 async function bootstrap() {
     env.config();
@@ -11,10 +13,18 @@ async function bootstrap() {
     await initDatabases();
 
     const app = await NestFactory.create(MainModule);
-    await app.listen(3000);
+    await app.listen(process.env.APP_PORT);
 }
 
 async function initDatabases() {
+    if (process.env.FIREBASE_ACCOUNT_URL) {
+        FirebaseService.initialize({
+            service_account_path: String(process.env.FIREBASE_ACCOUNT_URL),
+            db_url: String(process.env.FIREBASE_DB_URL),
+            storage_url: String(process.env.FIREBASE_STORAGE_URL)
+        });
+    }
+
     if (process.env.ELASTIC_DB_HOST && process.env.ELASTIC_DB_USERNAME && process.env.ELASTIC_DB_PASSWORD) {
         ElasticService.initialize({
             protocol: String('https'),

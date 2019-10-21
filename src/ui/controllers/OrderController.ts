@@ -2,7 +2,7 @@ import { BaseController } from './BaseController';
 import { OrderApp } from '../../app/app/OrderApp';
 import { OrderListRequestAdapter } from '../request-adapters/order/OrderListRequestAdapter';
 import { OrderDetailRequestAdapter } from '../request-adapters/order/OrderDetailRequestAdapter';
-import { Order } from '../../domain/model/OrderModel';
+import { Order } from '../../domain/models/OrderModel';
 import { ResponseInterface } from '../types/CommonType';
 import { OrderTransformer } from '../transformers/OrderTransformer';
 

@@ -61,7 +61,7 @@ export class DBService {
         return models;
     }
 
-    public async startTransaction() {
+    public static async startTransaction() {
         if (!modelsInitialized) {
             throw new Error('SQL Not initialize');
         }
@@ -70,29 +70,29 @@ export class DBService {
         });
     }
 
-    public async endTransaction() {
+    public static async endTransaction() {
         models.db_transaction = null;
     }
 
-    public async getTransaction() {
+    public static async getTransaction() {
         return models.db_transaction;
     }
 
-    public async commit() {
+    public static async commit() {
         if (models && models.db_transaction) {
             await models.db_transaction.commit();
             models.db_transaction = null;
         }
     }
 
-    public async rollback() {
+    public static async rollback() {
         if (models && models.db_transaction) {
             await models.db_transaction.rollback();
             models.db_transaction = null;
         }
     }
 
-    public async closeContext() {
+    public static async closeContext() {
         let result = null;
 
         if (models && models.context) {

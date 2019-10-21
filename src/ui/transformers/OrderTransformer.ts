@@ -1,4 +1,4 @@
-import { Order } from '../../domain/model/OrderModel';
+import { Order } from '../../domain/models/OrderModel';
 import BaseTransformer from './BaseTransformer';
 
 export class OrderTransformer extends BaseTransformer {

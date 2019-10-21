@@ -1,4 +1,4 @@
-import { DomainModelInterface } from "src/domain/model/DomainModelInterface";
+import { DomainModelInterface } from "src/domain/models/DomainModelInterface";
 
 export default class BaseTransformer {
     public static transformDetail(model: DomainModelInterface): object {

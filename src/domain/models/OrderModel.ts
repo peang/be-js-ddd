@@ -10,7 +10,7 @@ export class Order implements DomainModelInterface {
     private total: number;
     private wholesalerId: string;
     private wholesalerName: string;
-    private cratedAt: string;
+    private createdAt: string;
     private updatedAt: string;
 
     constructor(
@@ -33,7 +33,7 @@ export class Order implements DomainModelInterface {
         this.total = total;
         this.wholesalerId = wholesalerId;
         this.wholesalerName = wholesalerName;
-        this.cratedAt = createdAt;
+        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
@@ -117,11 +117,11 @@ export class Order implements DomainModelInterface {
     }
 
     public getCratedAt(): string {
-        return this.cratedAt;
+        return this.createdAt;
     }
 
     public setCratedAt(cratedAt: string): void {
-        this.cratedAt = cratedAt;
+        this.createdAt = cratedAt;
     }
 
     public getUpdatedAt(): string {
