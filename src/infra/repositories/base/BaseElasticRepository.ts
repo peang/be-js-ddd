@@ -75,8 +75,6 @@ export class BaseElasticRepository {
     }
 
     public async searchDocument(page: number = 0, perPage: number = 20, index: string, query: object, sort?: object) {
-        console.log(this.esclient);
-
         const { size, from } = CommonInfraService.generatePagination(page, perPage);
 
         return await this.esclient.search({
@@ -88,7 +86,6 @@ export class BaseElasticRepository {
                 sort
             }
         }).then((res: any) => res).catch((err: any) => {
-            console.log(err);
             process.exit(0);
         });
     }

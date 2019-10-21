@@ -7,7 +7,11 @@ export class BaseSQLRepository {
         this.db = DBService.getInstance();
     }
 
-    public setModel(modelName: string){
+    public setModel(modelName: string) {
         this.modelName = modelName;
+    }
+
+    public getModel() {
+        return this.modelName;
     }
 }

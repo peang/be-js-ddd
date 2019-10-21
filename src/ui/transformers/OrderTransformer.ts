@@ -1,7 +1,7 @@
 import { Order } from '../../domain/model/OrderModel';
 import BaseTransformer from './BaseTransformer';
 
-export default class OrderTransformer extends BaseTransformer {
+export class OrderTransformer extends BaseTransformer {
     public static async transformDetail(order: Order) {
         return {
             id: order.getId(),

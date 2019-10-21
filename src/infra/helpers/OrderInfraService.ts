@@ -2,13 +2,13 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class OrderInfraHelper {
-    public generateOrderFilters(filter: any, buyerId: string) {
+    public generateOrderElasticFilters(filter: any, buyerId: string) {
         const queryArr = [];
         const filters: any = {
             query: {
                 query_string: {
                     query: ''
-                }
+                },
             },
             sort: {}
         };
@@ -28,16 +28,16 @@ export class OrderInfraHelper {
     
         // explicityly define filters
         if (wholesaler_id) {
-            queryArr.push(`(wholesaler_id:${wholesaler_id})`); // Exact Query
+            queryArr.push(`(wholesaler_id:"${wholesaler_id}")`); // Exact Query
         }
         if (order_id) {
-            queryArr.push(`(order_id:${order_id})`); // Exact Query
-        }
-        if (order_number) {
-            queryArr.push(`(order_number:${order_number})`); // Exact Query
+            queryArr.push(`(order_id:"${order_id}")`); // Exact Query
         }
         if (status) {
-            queryArr.push(`(status:${status})`); // Exact Query
+            queryArr.push(`(status:"${status}")`); // Exact Query
+        }
+        if (order_number) {
+            queryArr.push(`(order_number:${order_number})`);
         }
     
         if (sort) {

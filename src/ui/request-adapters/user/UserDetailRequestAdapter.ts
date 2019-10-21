@@ -4,13 +4,13 @@ import { Injectable } from "@nestjs/common";
 import { RequestAdapter } from "../Adapters";
 import * as Joi from '@hapi/joi';
 import { RequestInterface } from "../../types/CommonType";
-import { IContext } from "src/ui/types/JWTType";
 
 @Injectable()
-export class OrderDetailRequestAdapter extends RequestAdapter implements RequestAdapterInterface {
-    public async getDTO(data: RequestInterface, context: IContext): Promise<OrderDetailDTO> {
+export class UserDetailRequestAdapter extends RequestAdapter implements RequestAdapterInterface {
+    public async getDTO(data: RequestInterface, context: object): Promise<OrderDetailDTO> {
         await this.validate(data, this.getScheme());
-        return new OrderDetailDTO(context.entity_id, data.params.order_id);
+        
+        return new OrderDetailDTO(data.params.order_id, '');
     }
 
     public getScheme(): Joi.ObjectSchema {
