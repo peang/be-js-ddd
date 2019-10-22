@@ -1,6 +1,7 @@
 export interface ResponseInterface {
     message: string,
-    data: any
+    status: number,
+    content: any
 }
 
 export interface RequestInterface {

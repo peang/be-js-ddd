@@ -4,28 +4,28 @@ import { OrderNotFoundException } from "../exceptions/OrderNotFoundException";
 import { OrderListDTO } from "../dto/order/OrderListDTO";
 import { OrderDetailDTO } from "../dto/order/OrderDetailDTO";
 import { Order } from '../../domain/models/OrderModel';
-import { OrderElasticRepository } from "../../infra/repositories/elastic/OrderElasticRepository";
 import { OrderInfraHelper } from "../../infra/helpers/OrderInfraService";
+import { OrderElasticRepository } from "../../infra/repositories/elastic/OrderElasticRepository";
 
 @Injectable()
 export class OrderApp {
     constructor(
-        private readonly OrderElasticRepo: OrderElasticRepository,
-        private readonly OrderInfraService: OrderInfraHelper
+        private readonly OrderElasticRepo: OrderElasticRepository
     ) { }
 
     public async orderList(dto: OrderListDTO): Promise<any> {
-        const query = this.OrderInfraService.generateOrderElasticFilters({ order_id: dto.order_id }, dto.buyer_id);
+        const query = OrderInfraHelper.generateOrderElasticFilters({ order_id: dto.order_id }, dto.buyer_id);
         const orders = await this.OrderElasticRepo.getOrderList(dto.page, dto.per_page, query.query);
+        
         return orders;
     }
 
     public async orderDetail(dto: OrderDetailDTO): Promise<Order> {
-        const query = this.OrderInfraService.generateOrderElasticFilters({ order_id: dto.order_id }, dto.buyer_id);
+        const query = OrderInfraHelper.generateOrderElasticFilters({ order_number: dto.order_number }, dto.buyer_id);
         const order = await this.OrderElasticRepo.getOrderDetail(query.query);
         
         if (!order) {
-            throw new OrderNotFoundException(dto.order_id);
+            throw new OrderNotFoundException(dto.order_number);
         }
 
         return order;

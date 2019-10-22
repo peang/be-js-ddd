@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class OrderInfraHelper {
-    public generateOrderElasticFilters(filter: any, buyerId: string) {
+    public static generateOrderElasticFilters(filter: any, buyerId: string) {
         const queryArr = [];
         const filters: any = {
             query: {

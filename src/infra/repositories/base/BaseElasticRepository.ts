@@ -1,7 +1,7 @@
 import { CommonInfraService } from '../../services/CommonInfraService';
 import { ElasticService } from '../../services/ElasticService';
 
-import { InternalServerErrorException } from '@nestjs/common';
+import { InternalServerErrorException, Injectable } from '@nestjs/common';
 
 export class BaseElasticRepository {
     constructor(private readonly esclient) {

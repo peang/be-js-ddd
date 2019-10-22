@@ -1,7 +1,11 @@
 import { NotFoundException } from "@nestjs/common";
 
 export class UserNotFoundException extends NotFoundException {
-    constructor(userId: string) {
-        super(`User ID : ${userId} Not Found`);
+    constructor(userId?: string) {
+        if (userId) {
+            super(`User ID : ${userId} Not Found`);
+        } else {
+            super('User Not Found');
+        }
     }
 }

@@ -6,7 +6,8 @@ import { Order } from '../../domain/models/OrderModel';
 import { ResponseInterface } from '../types/CommonType';
 import { OrderTransformer } from '../transformers/OrderTransformer';
 
-import { Controller, Get, Req, Param, Query } from '@nestjs/common';
+import { Controller, Get, Req, Param, Query, HttpStatus } from '@nestjs/common';
+
 @Controller('/order')
 export class OrderController extends BaseController {
     constructor(private readonly orderApp: OrderApp) {
@@ -19,15 +20,15 @@ export class OrderController extends BaseController {
         const dto = await adapter.getDTO({
             query
         }, req.context);
-        console.log(dto);
         const orders: { data: [Order] } = await this.orderApp.orderList(dto);
         return {
             message: 'ORDER_LIST',
-            data: await OrderTransformer.transformList(orders.data)
+            status: HttpStatus.OK,
+            content: await OrderTransformer.transformList(orders.data)
         };
     }
 
-    @Get('/:order_id')
+    @Get('/:order_no')
     async detail(@Req() req, @Param() params, @Query() query): Promise<ResponseInterface> {
         const adapter = new OrderDetailRequestAdapter();
         const dto = await adapter.getDTO({
@@ -36,7 +37,8 @@ export class OrderController extends BaseController {
         const order: Order = await this.orderApp.orderDetail(dto);
         return {
             message: 'ORDER_DETAIL',
-            data: await OrderTransformer.transformDetail(order)
+            status: HttpStatus.OK,
+            content: await OrderTransformer.transformDetail(order)
         };
     }
 }

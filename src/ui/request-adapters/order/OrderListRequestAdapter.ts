@@ -2,9 +2,10 @@ import { RequestAdapterInterface } from "../RequestAdapterInterface";
 import { OrderListDTO } from "../../../app/dto/order/OrderListDTO";
 import { Injectable } from "@nestjs/common";
 import { RequestAdapter } from "../Adapters";
-import * as Joi from '@hapi/joi';
 import { RequestInterface } from "../../../ui/types/CommonType";
 import { IContext } from "../../types/CommonType";
+
+import * as Joi from '@hapi/joi';
 
 @Injectable()
 export class OrderListRequestAdapter extends RequestAdapter implements RequestAdapterInterface {
