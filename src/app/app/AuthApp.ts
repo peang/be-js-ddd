@@ -2,7 +2,7 @@ import { RetailerUserModel } from "../../domain/models/RetailerUserModel";
 import { UserSQLRepository } from "../../infra/repositories/sql/UserSQLRepository";
 import { AuthCallbackDTO } from "../dto/auth/AuthCallbackDTO";
 import { AuthRefreshDTO } from "../dto/auth/AuthRefreshDTO";
-import { FirebaseService } from "../../infra/services/FirebaseService";
+import { FirestoreService } from "../../infra/services/FirestoreService";
 import { IFirebaseToken } from "../types/AuthTypes";
 import { UserNotFoundException } from "../exceptions/UserNotFoundException";
 import { JWTService } from "../../infra/services/JWTService";
@@ -21,7 +21,7 @@ export class AuthApp {
         let retailUser: RetailerUserModel | null;
 
         try {
-            firebaseUser = await FirebaseService.getInstance().auth().verifyIdToken(dto.token);
+            firebaseUser = await FirestoreService.getInstance().auth().verifyIdToken(dto.token);
         } catch (err) {
             throw new UnauthorizedException('INVALID_TOKEN');
         }
@@ -46,7 +46,7 @@ export class AuthApp {
             refresh_token: refreshToken.token
         })
 
-        await FirebaseService.getInstance().auth().revokeRefreshTokens(firebaseUser.uid);
+        await FirestoreService.getInstance().auth().revokeRefreshTokens(firebaseUser.uid);
 
         return {
             token,
@@ -80,7 +80,7 @@ export class AuthApp {
             refresh_token: refreshToken.token
         })
 
-        await FirebaseService.getInstance().auth().revokeRefreshTokens(retailUser.getUserId());
+        await FirestoreService.getInstance().auth().revokeRefreshTokens(retailUser.getUserId());
 
         return {
             token,

@@ -2,8 +2,10 @@ import { BaseSQLRepository } from '../base/BaseSQLRepository';
 import { RetailerUserModel } from '../../../domain/models/RetailerUserModel';
 
 export class UserSQLRepository extends BaseSQLRepository implements UserRepositoryInterface {
-    public modelName: string = 'retailer_user';
-
+    constructor() {
+        super('retailer_user')
+    }
+    
     public async getUserList(page: number, perPage: number, query: object, sort?: object) {
         return {};
     }

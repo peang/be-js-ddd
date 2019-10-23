@@ -4,7 +4,7 @@ import * as env from 'dotenv';
 
 import { ElasticService } from './infra/services/ElasticService';
 import { DBService } from './infra/services/DBService';
-import { FirebaseService } from './infra/services/FirebaseService';
+import { FirestoreService } from './infra/services/FirestoreService';
 import { AuthMiddleware } from './ui/middlewares/AuthMiddlware';
 
 async function bootstrap() {
@@ -18,7 +18,7 @@ async function bootstrap() {
 
 async function initDatabases() {
     if (process.env.FIREBASE_ACCOUNT_URL) {
-        FirebaseService.initialize({
+        FirestoreService.initialize({
             service_account_path: String(process.env.FIREBASE_ACCOUNT_URL),
             db_url: String(process.env.FIREBASE_DB_URL),
             storage_url: String(process.env.FIREBASE_STORAGE_URL)

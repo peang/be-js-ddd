@@ -9,7 +9,7 @@ interface IFirebaseInput {
 
 let instance: any;
 
-export class FirebaseService {
+export class FirestoreService {
     public static initialize(input: IFirebaseInput) {
         const filePath: string = path.join(__dirname, '../../..', input.service_account_path);
         const serviceAccount = require(filePath);
