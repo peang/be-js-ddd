@@ -1,1 +1,1 @@
-export interface DomainModelInterface{}
+interface DomainModelInterface{}

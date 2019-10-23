@@ -1,5 +1,5 @@
 import { BaseSQLRepository } from '../base/BaseSQLRepository';
-import { RetailerUser } from '../../../domain/models/UserModel';
+import { RetailerUserModel } from '../../../domain/models/RetailerUserModel';
 
 export class UserSQLRepository extends BaseSQLRepository implements UserRepositoryInterface {
     public modelName: string = 'retailer_user';
@@ -17,11 +17,11 @@ export class UserSQLRepository extends BaseSQLRepository implements UserReposito
         return user
     }
 
-    public async getOneBy(condition: object): Promise<RetailerUser | null> {
+    public async getOneBy(condition: object): Promise<RetailerUserModel | null> {
         const userResult = await this.findOne(condition);
 
         if (userResult) {
-            return new RetailerUser(
+            return new RetailerUserModel(
                 userResult.id,
                 userResult.user_id,
                 userResult.entity_id,

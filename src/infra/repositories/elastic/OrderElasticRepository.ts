@@ -1,5 +1,5 @@
 import { BaseElasticRepository } from "../base/BaseElasticRepository";
-import { Order } from '../../../domain/models/OrderModel';
+import { OrderModel } from '../../../domain/models/OrderModel';
 
 import { Injectable } from '@nestjs/common';
 
@@ -17,7 +17,7 @@ export class OrderElasticRepository extends BaseElasticRepository implements Ord
 
         searchResult.hits.hits.forEach((element: any) => {
             const resultData = element._source;
-            data.push(new Order(
+            data.push(new OrderModel(
                 resultData.order_id,
                 resultData.buyer_id,
                 resultData.order_number,
@@ -42,7 +42,7 @@ export class OrderElasticRepository extends BaseElasticRepository implements Ord
         };
     }
 
-    public async getOrderDetail(query): Promise<Order | null> {
+    public async getOrderDetail(query): Promise<OrderModel | null> {
         const searchResult: any = await this.findOne(index, query);
 
         if (searchResult.hits.hits[0] == undefined) {
@@ -50,7 +50,7 @@ export class OrderElasticRepository extends BaseElasticRepository implements Ord
         }
 
         const resultData = searchResult.hits.hits[0]._source;
-        return new Order(
+        return new OrderModel(
             resultData.order_id,
             resultData.buyer_id,
             resultData.order_number,

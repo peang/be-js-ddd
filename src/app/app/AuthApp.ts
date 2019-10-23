@@ -1,4 +1,4 @@
-import { RetailerUser } from "../../domain/models/UserModel";
+import { RetailerUserModel } from "../../domain/models/RetailerUserModel";
 import { UserSQLRepository } from "../../infra/repositories/sql/UserSQLRepository";
 import { AuthCallbackDTO } from "../dto/auth/AuthCallbackDTO";
 import { AuthRefreshDTO } from "../dto/auth/AuthRefreshDTO";
@@ -18,7 +18,7 @@ export class AuthApp {
 
     public async callback(dto: AuthCallbackDTO): Promise<any> {
         let firebaseUser: IFirebaseToken;
-        let retailUser: RetailerUser | null;
+        let retailUser: RetailerUserModel | null;
 
         try {
             firebaseUser = await FirebaseService.getInstance().auth().verifyIdToken(dto.token);
@@ -58,7 +58,7 @@ export class AuthApp {
     }
 
     public async refresh(dto: AuthRefreshDTO): Promise<any> {
-        let retailUser: RetailerUser | null = await this.UserSQLRepo.getOneBy({
+        let retailUser: RetailerUserModel | null = await this.UserSQLRepo.getOneBy({
             refresh_token: dto.refresh_token
         });
 

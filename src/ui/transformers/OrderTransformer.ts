@@ -1,8 +1,8 @@
-import { Order } from '../../domain/models/OrderModel';
+import { OrderModel } from '../../domain/models/OrderModel';
 import BaseTransformer from './BaseTransformer';
 
 export class OrderTransformer extends BaseTransformer {
-    public static async transformDetail(order: Order) {
+    public static async transformDetail(order: OrderModel) {
         return {
             id: order.getId(),
             buyer_id: order.getBuyerId(),
@@ -18,7 +18,7 @@ export class OrderTransformer extends BaseTransformer {
         };
     }
 
-    public static async transformList(orders: [Order]) {
+    public static async transformList(orders: [OrderModel]) {
         const data = [];
         await orders.forEach((order) => {
             data.push({

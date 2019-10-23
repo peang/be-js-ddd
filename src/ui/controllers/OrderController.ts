@@ -2,7 +2,7 @@ import { BaseController } from './BaseController';
 import { OrderApp } from '../../app/app/OrderApp';
 import { OrderListRequestAdapter } from '../request-adapters/order/OrderListRequestAdapter';
 import { OrderDetailRequestAdapter } from '../request-adapters/order/OrderDetailRequestAdapter';
-import { Order } from '../../domain/models/OrderModel';
+import { OrderModel } from '../../domain/models/OrderModel';
 import { ResponseInterface } from '../types/CommonType';
 import { OrderTransformer } from '../transformers/OrderTransformer';
 
@@ -20,7 +20,7 @@ export class OrderController extends BaseController {
         const dto = await adapter.getDTO({
             query
         }, req.context);
-        const orders: { data: [Order] } = await this.orderApp.orderList(dto);
+        const orders: { data: [OrderModel] } = await this.orderApp.orderList(dto);
         return {
             message: 'ORDER_LIST',
             status: HttpStatus.OK,
@@ -34,7 +34,7 @@ export class OrderController extends BaseController {
         const dto = await adapter.getDTO({
             params
         }, req.context);
-        const order: Order = await this.orderApp.orderDetail(dto);
+        const order: OrderModel = await this.orderApp.orderDetail(dto);
         return {
             message: 'ORDER_DETAIL',
             status: HttpStatus.OK,

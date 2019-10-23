@@ -1,7 +1,6 @@
-import { DomainModelInterface } from "./DomainModelInterface";
 import * as uuid from 'uuid';
 
-export class Order implements DomainModelInterface {
+export class OrderModel implements DomainModelInterface {
     private id: string;
     private buyerId: string;
     private orderNumber: string;
@@ -38,7 +37,7 @@ export class Order implements DomainModelInterface {
     }
 
     public static async create(buyerId: string, orderNumber: string, orderType: number, status: string, total: number, wholesalerId: string, wholesalerName: string) {
-        return new Order(
+        return new OrderModel(
             uuid.v4(),
             buyerId,
             orderNumber,

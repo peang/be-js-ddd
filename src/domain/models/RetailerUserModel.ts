@@ -1,10 +1,8 @@
-import { DomainModelInterface } from "./DomainModelInterface";
-
 import * as uuid from 'uuid';
 import * as bcrypt from 'bcryptjs';
 
 const salt = 10;
-export class RetailerUser implements DomainModelInterface {
+export class RetailerUserModel implements DomainModelInterface {
     private id: string;
     private userId: string;
     private entityId: string;
@@ -67,16 +65,16 @@ export class RetailerUser implements DomainModelInterface {
         password: string,
         pin: string,
         img: string
-    ): Promise<RetailerUser> {
-        return new RetailerUser(
+    ): Promise<RetailerUserModel> {
+        return new RetailerUserModel(
             uuid.v4(),
             userId,
             entityId,
             name,
             email,
-            RetailerUser.normalizePhone(phone),
-            RetailerUser.generateHash(password),
-            RetailerUser.generateHash(pin),
+            RetailerUserModel.normalizePhone(phone),
+            RetailerUserModel.generateHash(password),
+            RetailerUserModel.generateHash(pin),
             false,
             false,
             false,
