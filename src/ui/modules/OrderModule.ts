@@ -1,14 +1,12 @@
 // UI
 import { OrderController } from '../controllers/OrderController';
-import { OrderListRequestAdapter } from './../request-adapters/order/OrderListRequestAdapter';
 import { AuthMiddleware } from '../middlewares/AuthMiddlware';
 
 // APP
-import { OrderApp } from '../../app/app/OrderApp';
+//
 
 // INFRA
-import { OrderInfraHelper } from '../../infra/helpers/OrderInfraService';
-import { OrderElasticRepository } from '../../infra/repositories/elastic/OrderElasticRepository';
+//
 
 // providers
 import { OrderProvider } from './providers/OrderProvider';

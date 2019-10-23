@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 
-class EntityModel implements DomainModelInterface {
+export class EntityModel implements DomainModelInterface {
     private id: string;
     private email: string;
     private isAgreeDataSharing: boolean;

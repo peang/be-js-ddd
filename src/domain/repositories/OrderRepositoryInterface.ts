@@ -1,5 +1,7 @@
-interface OrderRepositoryInterface {
-    getOrderList(page: number, perPage: number, query: object, sort?: object);
+import { OrderModel } from "../models/OrderModel";
 
-    getOrderDetail(query: object);
+export interface OrderRepositoryInterface {
+    getOrderList(page: number, perPage: number, query: object, sort?: object): Promise<{ data: OrderModel[], total: number }>;
+
+    getOrderDetail(condition: object): Promise<OrderModel>;
 }

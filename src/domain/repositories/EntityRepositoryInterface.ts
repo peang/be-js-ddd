@@ -1,5 +1,7 @@
-interface EntityRepositoryInterface {
-    getEntityList(page: number, perPage: number, query: object, sort?: object);
+import { EntityModel } from "../models/EntityModel";
 
-    getEntityDetail(query: object);
+export interface EntityRepositoryInterface {
+    getEntityList(page: number, perPage: number, query: object, sort?: object): Promise<{ data: EntityModel[], total: number }>;
+
+    getEntityDetail(condition: object): Promise<EntityModel>;
 }

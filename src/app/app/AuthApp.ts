@@ -1,5 +1,5 @@
 import { RetailerUserModel } from "../../domain/models/RetailerUserModel";
-import { UserSQLRepository } from "../../infra/repositories/sql/UserSQLRepository";
+import { RetailerUserSQLRepository } from "../../infra/repositories/sql/RetailerUserSQLRepository";
 import { AuthCallbackDTO } from "../dto/auth/AuthCallbackDTO";
 import { AuthRefreshDTO } from "../dto/auth/AuthRefreshDTO";
 import { FirestoreService } from "../../infra/services/FirestoreService";
@@ -13,7 +13,7 @@ import { Injectable, UnauthorizedException, BadRequestException } from "@nestjs/
 @Injectable()
 export class AuthApp {
     constructor(
-        private readonly UserSQLRepo: UserSQLRepository
+        private readonly UserSQLRepo: RetailerUserSQLRepository
     ) { }
 
     public async callback(dto: AuthCallbackDTO): Promise<any> {
@@ -26,7 +26,7 @@ export class AuthApp {
             throw new UnauthorizedException('INVALID_TOKEN');
         }
 
-        retailUser = await this.UserSQLRepo.getOneBy({
+        retailUser = await this.UserSQLRepo.getRetailerUserDetail({
             user_id: firebaseUser.uid
         });
         if (!retailUser) {
@@ -58,7 +58,7 @@ export class AuthApp {
     }
 
     public async refresh(dto: AuthRefreshDTO): Promise<any> {
-        let retailUser: RetailerUserModel | null = await this.UserSQLRepo.getOneBy({
+        let retailUser: RetailerUserModel | null = await this.UserSQLRepo.getRetailerUserDetail({
             refresh_token: dto.refresh_token
         });
 
@@ -90,4 +90,5 @@ export class AuthApp {
             has_pin: retailUser.getPin() ? true : false
         };
     }
+
 }
