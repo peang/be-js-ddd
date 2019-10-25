@@ -38,7 +38,7 @@ export class FirestoreService {
 
     public static getInstance() {
         if (!instance) {
-            throw new Error('Firebase Not initialize');
+            throw new Error('Firestore Not initialize');
           }
           return instance;
     }

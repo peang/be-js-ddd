@@ -1,14 +1,14 @@
 import { DTOInterface } from "../DTOInterface";
 
-export class OrderDetailDTO implements DTOInterface {
+export class EntityRelationDetailDTO implements DTOInterface {
     public buyerId: string;
-    public orderNumber: string;
+    public sellerId: string;
 
     constructor(
         buyerId: string,
-        orderNumber: string
+        sellerId: string
     ) {
         this.buyerId = buyerId;
-        this.orderNumber = orderNumber;
+        this.sellerId = sellerId;
     }
 }

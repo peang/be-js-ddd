@@ -59,7 +59,7 @@ export class AuthApp {
 
     public async refresh(dto: AuthRefreshDTO): Promise<any> {
         let retailUser: RetailerUserModel | null = await this.UserSQLRepo.getRetailerUserDetail({
-            refresh_token: dto.refresh_token
+            refresh_token: dto.refreshToken
         });
 
         if (!retailUser) {

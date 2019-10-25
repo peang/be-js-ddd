@@ -1,11 +1,11 @@
 import { DTOInterface } from "../DTOInterface";
 
 export class AuthRefreshDTO implements DTOInterface {
-    public refresh_token: string;
+    public refreshToken: string;
 
     constructor(
-        refresh_token: string
+        refreshToken: string
     ) {
-        this.refresh_token = refresh_token;
+        this.refreshToken = refreshToken;
     }
 }

@@ -1,4 +1,4 @@
-class EntityKTP {
+export class EntityKTP {
     private address: string;
     private birthdate: string;
     private birthplace: string;
@@ -32,6 +32,82 @@ class EntityKTP {
         this.occupation = occupation;
         this.scan = scan;
         this.selfie = selfie;
+    }
+
+    public static create(ktp: {
+        address: string,
+        birthdate: string,
+        birthplace: string,
+        fullname: string,
+        gender: string,
+        isMarried: string,
+        nik: string,
+        occupation: string,
+        scan: string,
+        selfie: string
+    } | null) {
+        if (ktp) {
+            return new EntityKTP(
+                ktp.address,
+                ktp.birthdate,
+                ktp.birthplace,
+                ktp.fullname,
+                ktp.gender,
+                ktp.isMarried,
+                ktp.nik,
+                ktp.occupation,
+                ktp.scan,
+                ktp.selfie
+            );
+        } else {
+            return new EntityKTP(
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            );
+        }
+    }
+
+    public static createMany(ktps: [{
+        address: string,
+        birthdate: string,
+        birthplace: string,
+        fullname: string,
+        gender: string,
+        isMarried: string,
+        nik: string,
+        occupation: string,
+        scan: string,
+        selfie: string
+    }] | null): EntityKTP[] {
+        const ktpsModel = [];
+        
+        for (let i = 0; i <= ktps.length; i++) {
+            const ktp = ktps[i];
+            // console.log(ktp);
+            ktpsModel.push(new EntityKTP(
+                ktp.address,
+                ktp.birthdate,
+                ktp.birthplace,
+                ktp.fullname,
+                ktp.gender,
+                ktp.isMarried,
+                ktp.nik,
+                ktp.occupation,
+                ktp.scan,
+                ktp.selfie
+            ));
+        }
+        
+        console.log(ktpsModel);
+        return ktpsModel;
     }
 
     public getAddress(): string {

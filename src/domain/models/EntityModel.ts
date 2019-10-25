@@ -1,4 +1,5 @@
 import * as uuid from 'uuid';
+import { EntityKTP } from '../value-objects/EntityKTP';
 
 export class EntityModel implements DomainModelInterface {
     private id: string;
@@ -6,7 +7,7 @@ export class EntityModel implements DomainModelInterface {
     private isAgreeDataSharing: boolean;
     private isRegisteredSeller: boolean;
     private isWsActive: boolean;
-    private ktp: [EntityKTP];
+    private ktp: EntityKTP[];
     private logo: string;
     private maxDevice: number;
     private phone: string;
@@ -26,7 +27,7 @@ export class EntityModel implements DomainModelInterface {
         isAgreeDataSharing: boolean,
         isRegisteredSeller: boolean,
         isWsActive: boolean,
-        ktp: [EntityKTP],
+        ktp: EntityKTP[],
         logo: string,
         maxDevice: number,
         phone: string,
@@ -138,7 +139,7 @@ export class EntityModel implements DomainModelInterface {
         this.isWsActive = isWsActive;
     }
 
-    public getKtp(): [EntityKTP] {
+    public getKtp(): EntityKTP[] {
         return this.ktp;
     }
 

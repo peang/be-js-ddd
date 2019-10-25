@@ -14,27 +14,27 @@ export class OrderApp {
     ) { }
 
     public async orderList(dto: OrderListDTO): Promise<any> {
-        const query = OrderInfraHelper.generateOrderElasticFilters({ order_id: dto.order_id }, dto.buyer_id);
-        const { data: orders, total } = await this.OrderElasticRepo.getOrderList(dto.page, dto.per_page, query.query);
+        const query = OrderInfraHelper.generateOrderElasticFilters({ order_id: dto.orderId }, dto.buyerId);
+        const { data: orders, total } = await this.OrderElasticRepo.getOrderList(dto.page, dto.perPage, query.query);
 
 
         return {
             orders,
             meta: {
                 page: Number(dto.page),
-                per_page: Number(dto.per_page),
+                per_page: Number(dto.perPage),
                 total_data: Number(total),
-                total_page: Math.ceil(total / dto.per_page)
+                total_page: Math.ceil(total / dto.perPage)
             }
         };
     }
 
     public async orderDetail(dto: OrderDetailDTO): Promise<OrderModel> {
-        const query = OrderInfraHelper.generateOrderElasticFilters({ order_number: dto.order_number }, dto.buyer_id);
+        const query = OrderInfraHelper.generateOrderElasticFilters({ order_number: dto.orderNumber }, dto.buyerId);
         const order = await this.OrderElasticRepo.getOrderDetail(query.query);
 
         if (!order) {
-            throw new OrderNotFoundException(dto.order_number);
+            throw new OrderNotFoundException(dto.orderNumber);
         }
 
         return order;
