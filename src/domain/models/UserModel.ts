@@ -1,4 +1,5 @@
 import { Timestamp } from "@google-cloud/firestore";
+import uuid = require("uuid");
 
 export class UserModel implements DomainModelInterface {
     private userId: string;
@@ -28,6 +29,28 @@ export class UserModel implements DomainModelInterface {
         this.phoneNumber = phoneNumber;
         this.createdAt = createdAt;
         this.updateAt = updateAt;
+    }
+
+    public static create(
+        userId: string,
+        entityId: string,
+        addressId: string,
+        entityType: string,
+        isVerified: boolean,
+        phoneNumber: string,
+        createdAt: Timestamp,
+        updatedAt: Timestamp
+    ) {
+        return new UserModel(
+            userId,
+            entityId,
+            addressId,
+            entityType,
+            isVerified,
+            phoneNumber,
+            createdAt,
+            updatedAt
+        );
     }
 
     public getUserId(): string {

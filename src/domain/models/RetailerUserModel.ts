@@ -56,7 +56,7 @@ export class RetailerUserModel implements DomainModelInterface {
         this.updatedAt = updatedAt;
     }
 
-    public static async create(
+    public static create(
         userId: string,
         entityId: string,
         name: string,
@@ -65,7 +65,7 @@ export class RetailerUserModel implements DomainModelInterface {
         password: string,
         pin: string,
         img: string
-    ): Promise<RetailerUserModel> {
+    ): RetailerUserModel {
         return new RetailerUserModel(
             uuid.v4(),
             userId,

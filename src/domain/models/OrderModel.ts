@@ -36,7 +36,15 @@ export class OrderModel implements DomainModelInterface {
         this.updatedAt = updatedAt;
     }
 
-    public static async create(buyerId: string, orderNumber: string, orderType: number, status: string, total: number, wholesalerId: string, wholesalerName: string) {
+    public static create(
+        buyerId: string,
+        orderNumber: string,
+        orderType: number,
+        status: string,
+        total: number,
+        wholesalerId: string,
+        wholesalerName: string
+    ): OrderModel {
         return new OrderModel(
             uuid.v4(),
             buyerId,

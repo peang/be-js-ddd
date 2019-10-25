@@ -60,7 +60,7 @@ export class EntityModel implements DomainModelInterface {
         this.updatedAt = updatedAt;
     }
 
-    public create(
+    public static create(
         email: string,
         isAgreeDataSharing: boolean,
         isRegisteredSeller: boolean,
@@ -76,7 +76,7 @@ export class EntityModel implements DomainModelInterface {
         storeCode: string,
         storeName: string,
         type: number
-    ) {
+    ): EntityModel {
         return new EntityModel(
             uuid.v4(),
             email,
