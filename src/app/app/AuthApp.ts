@@ -8,12 +8,13 @@ import { UserNotFoundException } from "../exceptions/UserNotFoundException";
 import { JWTService } from "../../infra/services/JWTService";
 import { IRefreshToken } from "src/infra/types/JWTType";
 
-import { Injectable, UnauthorizedException, BadRequestException } from "@nestjs/common";
+import { Injectable, UnauthorizedException, BadRequestException, Inject } from "@nestjs/common";
+import { RetailerUserRepositoryInterface } from "../../domain/repositories/RetailerUserRepositoryInterface";
 
 @Injectable()
 export class AuthApp {
     constructor(
-        private readonly UserSQLRepo: RetailerUserSQLRepository
+        @Inject('RetailerUserSQLRepository') private readonly UserRepo: RetailerUserRepositoryInterface
     ) { }
 
     public async callback(dto: AuthCallbackDTO): Promise<any> {
@@ -26,7 +27,7 @@ export class AuthApp {
             throw new UnauthorizedException('INVALID_TOKEN');
         }
 
-        retailUser = await this.UserSQLRepo.getRetailerUserDetail({
+        retailUser = await this.UserRepo.getRetailerUserDetail({
             user_id: firebaseUser.uid
         });
         if (!retailUser) {
@@ -40,7 +41,7 @@ export class AuthApp {
         const refreshToken: IRefreshToken = await JWTService.generateRefreshToken();
 
         // Update Refresh Token
-        await this.UserSQLRepo.update({
+        await this.UserRepo.updateRetailerUser({
             user_id: firebaseUser.uid
         }, {
             refresh_token: refreshToken.token
@@ -58,7 +59,7 @@ export class AuthApp {
     }
 
     public async refresh(dto: AuthRefreshDTO): Promise<any> {
-        let retailUser: RetailerUserModel | null = await this.UserSQLRepo.getRetailerUserDetail({
+        let retailUser: RetailerUserModel | null = await this.UserRepo.getRetailerUserDetail({
             refresh_token: dto.refreshToken
         });
 
@@ -67,14 +68,14 @@ export class AuthApp {
         }
 
         /** generate jwt token and refresh token */
-        const token: string = await JWTService.generateToken({
+        const token: String = await JWTService.generateToken({
             eid: retailUser.getEntityId(),
             uid: retailUser.getUserId()
         });
         const refreshToken: IRefreshToken = await JWTService.generateRefreshToken();
 
         // Update Refresh Token
-        await this.UserSQLRepo.update({
+        await this.UserRepo.updateRetailerUser({
             user_id: retailUser.getUserId()
         }, {
             refresh_token: refreshToken.token

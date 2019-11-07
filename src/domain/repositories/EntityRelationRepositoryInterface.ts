@@ -1,5 +1,5 @@
-import { EntityRelationModel } from "../models/EntityRelationModel";
+import { EntityRelationReadModel } from "../../infra/models/read/EntityRelationReadModel";
 
 export interface EntityRelationRepositoryInterface {
-    getEntityRelationDetail(buyerId: string, sellerId: string): Promise<EntityRelationModel>;
+    getEntityRelationDetail(buyerId: string, sellerId: string): Promise<EntityRelationReadModel>;
 }

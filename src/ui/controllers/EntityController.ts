@@ -20,8 +20,6 @@ export class EntityController extends BaseController {
         }, req.context);
         const relation: EntityRelationModel = await this.entityRelationApp.entityRelationDetail(dto);
 
-        console.log(relation);
-        process.exit(0);
         return {
             message: 'ENTITY_RELATION_DETAIL',
             status: HttpStatus.OK,

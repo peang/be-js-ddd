@@ -39,9 +39,9 @@ export class OrderElasticRepository extends BaseElasticRepository implements Ord
         // return {
         //     data,
         //     meta: {
-        //         page: Number(page),
-        //         per_page: Number(perPage),
-        //         total_data: Number(total),
+        //         page: number(page),
+        //         per_page: number(perPage),
+        //         total_data: number(total),
         //         total_page: Math.ceil(total / perPage)
         //     }
         // };

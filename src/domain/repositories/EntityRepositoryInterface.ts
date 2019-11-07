@@ -1,7 +1,7 @@
 import { EntityModel } from "../models/EntityModel";
 
 export interface EntityRepositoryInterface {
-    getEntityList(page: number, perPage: number, query: object, sort?: object): Promise<{ data: EntityModel[], total: number }>;
+    getEntityList(page: Number, perPage: Number, query: object, sort?: object): Promise<{ data: EntityModel[], total: Number }>;
 
     getEntityDetail(entityId: string): Promise<EntityModel>;
 }

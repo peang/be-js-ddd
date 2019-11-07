@@ -3,7 +3,6 @@ import { NotImplementedException } from '@nestjs/common';
 
 export class BaseSQLRepository {
     public modelName: string;
-
     private dbclient: any;
 
     constructor(modelName: string) {

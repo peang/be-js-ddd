@@ -6,13 +6,14 @@ export class RetailerUserSQLRepository extends BaseSQLRepository implements Reta
     constructor() {
         super('retailer_user')
     }
-    
+
     public async getRetailerUserList(page: number, perPage: number, query: object, sort?: object): Promise<{ data: RetailerUserModel[], total: number }> {
         throw new Error("Method not implemented.");
     }
 
     public async getRetailerUserDetail(condition: object):Promise<RetailerUserModel> {
         const user = await this.findOne(condition);
+        console.log(user);
 
         if (user) {
             return new RetailerUserModel(
@@ -36,5 +37,9 @@ export class RetailerUserSQLRepository extends BaseSQLRepository implements Reta
         }
 
         return user
+    }
+
+    public async updateRetailerUser(payload: object, condition: object): Promise<void> {
+        return this.update(condition, payload);
     }
 }

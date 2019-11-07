@@ -5,13 +5,15 @@
 //
 
 // INFRA
-import { RetailerUserSQLRepository } from '../../infra/repositories/sql/RetailerUserSQLRepository';
+//
+
+import { RetailerUserProvider } from './providers/RetailerUserProvider';
 
 import { Module } from '@nestjs/common';
 
 @Module({
     controllers: [],
-    providers: [RetailerUserSQLRepository],
-    exports: [RetailerUserSQLRepository]
+    providers: RetailerUserProvider,
+    exports: RetailerUserProvider
 })
 export class RetailerUserModule { }

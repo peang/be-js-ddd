@@ -8,7 +8,7 @@ export class EntityRelationModel implements DomainModelInterface {
     private membershipId: string;
     private membershipLevel: number;
     private membreshipNote: string;
-    private isOnlineActive: boolean;
+    private isOnlineActive: Boolean;
     private shippingMethod: number;
     private createdAt: string;
     private updatedAt: string;
@@ -21,7 +21,7 @@ export class EntityRelationModel implements DomainModelInterface {
         membershipId: string,
         membershipLevel: number,
         membreshipNote: string,
-        isOnlineActive: boolean,
+        isOnlineActive: Boolean,
         shippingMethod: number,
         createdAt: string,
         updatedAt: string
@@ -46,7 +46,7 @@ export class EntityRelationModel implements DomainModelInterface {
         membershipId: string,
         membershipLevel: number,
         membreshipNote: string,
-        isOnlineActive: boolean,
+        isOnlineActive: Boolean,
         shippingMethod: number,
         createdAt: string,
         updatedAt: string
@@ -122,11 +122,11 @@ export class EntityRelationModel implements DomainModelInterface {
         this.membreshipNote = membreshipNote;
     }
 
-    public isIsOnlineActive(): boolean {
+    public isIsOnlineActive(): Boolean {
         return this.isOnlineActive;
     }
 
-    public setIsOnlineActive(isOnlineActive: boolean): void {
+    public setIsOnlineActive(isOnlineActive: Boolean): void {
         this.isOnlineActive = isOnlineActive;
     }
 
