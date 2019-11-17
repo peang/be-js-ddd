@@ -17,9 +17,8 @@ export class OrderApp {
         const query = OrderInfraHelper.generateOrderElasticFilters({ order_id: dto.orderId }, dto.buyerId);
         const { data: orders, total } = await this.OrderElasticRepo.getOrderList(dto.page, dto.perPage, query.query);
 
-
         return {
-            orders,
+            data: orders,
             meta: {
                 page: Number(dto.page),
                 per_page: Number(dto.perPage),

@@ -11,12 +11,12 @@ import * as Joi from '@hapi/joi';
 export class OrderDetailRequestAdapter extends RequestAdapter implements RequestAdapterInterface {
     public async getDTO(data: RequestInterface, context: IContext): Promise<OrderDetailDTO> {
         await this.validate(data, this.getScheme());
-        return new OrderDetailDTO(context.entity_id, data.params.order_no);
+        return new OrderDetailDTO(context.entity_id, data.body.order_no);
     }
 
     public getScheme(): Joi.ObjectSchema {
         return Joi.object({
-            params: Joi.object({
+            body: Joi.object({
                 order_no: Joi.string().required()
             }).required()
         })
